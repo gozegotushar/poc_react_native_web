@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
 import {
-    View, Text, Modal
+    View, Modal
 } from 'react-native';
 import makeStyles from './styles';
 import { useTheme } from '../../hooks/theme'
 import Button from '../Button';
 import { useWindowDimensions } from 'react-native-web';
-// import ColorPicker, { Panel1, Swatches, Preview, OpacitySlider, HueSlider } from 'reanimated-color-picker';
+import { responsiveSize } from '../../utils/Size';
+import Spacing from '../Spacing';
 
-function AppModal({ shouldShow = false, onCloseModal = undefined }) {
+function AppModal({ shouldShow = false, onCloseModal = undefined, onSaveClicked = undefined, children }) {
     const { theme } = useTheme();
     const styles = useMemo(() => makeStyles(theme), [theme]);
 
@@ -19,23 +20,24 @@ function AppModal({ shouldShow = false, onCloseModal = undefined }) {
         onCloseModal?.()
     }
 
-    // Note: 👇 This can be a `worklet` function.
-    const onSelectColor = ({ hex }) => {
-        // do something with the selected color.
-        console.log(hex);
-    };
+    const _onSaveClicked = () => {
+        onSaveClicked?.()
+    }
 
     return (
         <Modal transparent visible={shouldShow} >
             <View style={{ width: width, height: height, ...styles.container }}>
-                <View>
-                    <Text style={styles.textStyle}>{'title'}</Text>
-
-                    {/* <ColorPicker style={{ width: '70%' }} value='red' onComplete={onSelectColor}>
-                        <Preview />
-                    </ColorPicker> */}
-
-                    <Button title='Close' backgroundColor={theme.getPrimary()} onPress={closeModal} />
+                <View style={{ backgroundColor: 'white', padding: 10, width: responsiveSize(200), alignItems: 'center' }} >
+                    <View>
+                        <View>
+                            {children}
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Button title='Close' backgroundColor={theme.getPrimary()} onPress={closeModal} />
+                            <Spacing width={10} />
+                            <Button title='Save' backgroundColor={theme.getPrimary()} onPress={_onSaveClicked} />
+                        </View>
+                    </View>
                 </View>
             </View>
         </Modal>

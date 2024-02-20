@@ -3,27 +3,39 @@ import {
         View,
 } from 'react-native';
 import makeStyles from './styles';
+import { useDispatch } from 'react-redux'
 import { useTheme } from '../../hooks/theme'
-import { TextInput } from 'react-native-web';
 import Button from '../../components/Button';
 import Spacing from '../../components/Spacing';
-import AppModal from '../../components/AppModal';
+import ColorPicker from '../../components/ColorPicker';
+import { setPrimaryColor, setSecondaryColor } from '../../store/features/overriddenConfig/actions';
 
 function ScreenUtility(props) {
         const { theme } = useTheme();
+        const dispatch = useDispatch();
         const styles = useMemo(() => makeStyles(theme), [theme]);
-        const [showColorPicker, setShowColorPicker] = useState(false)
+        const [showPrimaryColorPicker, setShowPrimaryColorPicker] = useState(false)
+        const [showSecondaryColorPicker, setShowSecondaryColorPicker] = useState(false)
 
         const onPrimaryColorChangeClicked = () => {
-                setShowColorPicker(!showColorPicker)
+                setShowPrimaryColorPicker(!showPrimaryColorPicker)
         }
 
         const onSecondaryColorChangeClicked = () => {
-                setShowColorPicker(!showColorPicker)
+                setShowSecondaryColorPicker(!showSecondaryColorPicker)
         }
 
         const onCloseModal = () => {
-                setShowColorPicker(false)
+                setShowPrimaryColorPicker(false)
+                setShowSecondaryColorPicker(false)
+        }
+
+        const savePrimaryColor = (color) => {
+                dispatch(setPrimaryColor(color))
+        }
+
+        const saveSecondaryColor = (color) => {
+                dispatch(setSecondaryColor(color))
         }
 
         return (<View style={{ padding: 10 }} >
@@ -31,7 +43,8 @@ function ScreenUtility(props) {
                 <Spacing height={10} />
                 <Button title='Select Secondary Color' backgroundColor={theme.getSecondary()} onPress={onSecondaryColorChangeClicked} />
                 <Spacing height={10} />
-                <AppModal shouldShow={showColorPicker} onCloseModal={onCloseModal} />
+                <ColorPicker shouldShow={showPrimaryColorPicker} onCloseModal={onCloseModal} onSavePressed={savePrimaryColor} />
+                <ColorPicker shouldShow={showSecondaryColorPicker} onCloseModal={onCloseModal} onSavePressed={saveSecondaryColor} />
         </View>);
 }
 
