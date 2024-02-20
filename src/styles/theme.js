@@ -51,7 +51,7 @@ export const generateTheme = (primary, accent) => {
     getPrimaryLight15: () => themeGeneratedC.primaryLight15,
     getPrimaryLight10: () => themeGeneratedC.primaryLight10,
     getPrimaryLight5: () => themeGeneratedC.primaryLight5,
-
+    getSecondary: () => secondaryColor,
     getAccentDark75: () => themeGeneratedC.accentDark75,
     getAccentDark40: () => themeGeneratedC.accentDark40,
     getAccentDark25: () => themeGeneratedC.accentDark25,

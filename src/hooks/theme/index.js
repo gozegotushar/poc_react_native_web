@@ -1,18 +1,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { generateTheme } from '../../styles/theme';
-// import { useSelector } from 'react-redux';
-// import {
-//   getPrimaryColor,
-//   getSecondaryColor,
-// } from '@store/features/core/overriddenConfig/selectors';
+import { useSelector } from 'react-redux';
+import { getPrimaryColor, getSecondaryColor } from '../../store/features/overriddenConfig/selectors';
 
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ providedTheme, children }) => {
-  const overriddenPrimaryColor = '#7F27FF'
-  const overriddenSecondaryColor = '#FF8911';
+  const overriddenPrimaryColor = useSelector(getPrimaryColor)
+  const overriddenSecondaryColor = useSelector(getSecondaryColor);
 
   const [theme, setTheme] = useState(() => {
     if (providedTheme) {

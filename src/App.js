@@ -1,16 +1,16 @@
-import MobileLayer from './components/MobileLayer';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from './hooks/theme';
-import Home from './modules/home';
 import Dashboard from './modules/dashboard';
+import store from './store/setup';
 
 function App() {
 
   return (
-    <ThemeProvider>
-      <Dashboard>
-
-      </Dashboard>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Dashboard />
+      </ThemeProvider>
+    </Provider>
   );
 }
 
