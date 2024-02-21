@@ -1,14 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { generateTheme } from '../../styles/theme';
 import { useSelector } from 'react-redux';
-import { getPrimaryColor, getSecondaryColor } from '../../store/features/overriddenConfig/selectors';
+import {
+  getPrimaryColor,
+  getSecondaryColor
+} from '../../store/features/overriddenConfig/selectors';
 
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ providedTheme, children }) => {
-  const overriddenPrimaryColor = useSelector(getPrimaryColor)
+  const overriddenPrimaryColor = useSelector(getPrimaryColor);
   const overriddenSecondaryColor = useSelector(getSecondaryColor);
 
   const [theme, setTheme] = useState(() => {
@@ -25,10 +28,7 @@ export const ThemeProvider = ({ providedTheme, children }) => {
       return;
     }
 
-    const defaultTheme = generateTheme(
-      overriddenPrimaryColor,
-      overriddenSecondaryColor,
-    );
+    const defaultTheme = generateTheme(overriddenPrimaryColor, overriddenSecondaryColor);
 
     setTheme(defaultTheme);
   }, [overriddenPrimaryColor, overriddenSecondaryColor, providedTheme]);
@@ -37,7 +37,7 @@ export const ThemeProvider = ({ providedTheme, children }) => {
     <ThemeContext.Provider
       value={{
         theme,
-        setTheme,
+        setTheme
       }}>
       {children}
     </ThemeContext.Provider>

@@ -4,7 +4,6 @@ import Dashboard from './modules/dashboard';
 import store from './store/setup';
 
 function App() {
-
   return (
     <Provider store={store}>
       <ThemeProvider>

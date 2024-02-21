@@ -1,12 +1,7 @@
 import chroma from 'chroma-js';
-import {
-  darken,
-  getTextColor,
-  lighten,
-  Colors as preDefinedColors,
-} from './color';
+import { darken, getTextColor, lighten, Colors as preDefinedColors } from './color';
 
-const getMdButtonTextColor = hex => {
+const getMdButtonTextColor = (hex) => {
   return chroma(hex).get('lab.l') < 70 ? 'white' : 'black';
 };
 
@@ -32,14 +27,13 @@ const themeGeneratedColors = (primary, accent) => {
     accentLight15: lighten(accent, 36),
 
     warning: darken(accent, 0.1),
-    success: darken(primary, 0.1),
+    success: darken(primary, 0.1)
   };
 };
 
 export const generateTheme = (primary, accent) => {
   const secondaryColor = accent ? accent : preDefinedColors.gray600;
-  const isLightText =
-    getTextColor(primary).toString().toLowerCase() === 'white';
+  const isLightText = getTextColor(primary).toString().toLowerCase() === 'white';
   const themeGeneratedC = themeGeneratedColors(primary, secondaryColor);
   return {
     getPrimaryDark40: () => themeGeneratedC.getPrimaryDark40,
@@ -91,12 +85,9 @@ export const generateTheme = (primary, accent) => {
     getFooterNote: () => preDefinedColors.ocean,
     getRipple: () => preDefinedColors.ocean,
 
-    getThemedText: () =>
-      isLightText ? preDefinedColors.white : preDefinedColors.black,
-    getThemedTextLight: () =>
-      isLightText ? preDefinedColors.gray300 : preDefinedColors.gray600,
-    getThemedTextLight2: () =>
-      isLightText ? preDefinedColors.gray300 : preDefinedColors.coolGray,
+    getThemedText: () => (isLightText ? preDefinedColors.white : preDefinedColors.black),
+    getThemedTextLight: () => (isLightText ? preDefinedColors.gray300 : preDefinedColors.gray600),
+    getThemedTextLight2: () => (isLightText ? preDefinedColors.gray300 : preDefinedColors.coolGray),
     getText: () => preDefinedColors.black,
     getText2: () => preDefinedColors.coolGray,
     getTextLight: () => preDefinedColors.gray600,
@@ -112,6 +103,6 @@ export const generateTheme = (primary, accent) => {
     getOverlayBackground: () => preDefinedColors.darkGray,
     getNoNetworkBackground: () => preDefinedColors.coolGray200,
     getNoNetwork: () => preDefinedColors.coolGray900,
-    getProgressBarColor: () => preDefinedColors.lightGray2,
+    getProgressBarColor: () => preDefinedColors.lightGray2
   };
 };

@@ -1,7 +1,7 @@
-import overriddenConfig from "./features/overriddenConfig/reducers"
+import overriddenConfig from './features/overriddenConfig/reducers';
 
 const reducer = {
-        overriddenConfigReducer: overriddenConfig,
-}
+  overriddenConfigReducer: overriddenConfig
+};
 
-export default reducer
+export default reducer;

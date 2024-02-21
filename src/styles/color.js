@@ -2,28 +2,25 @@ import { TinyColor } from '@ctrl/tinycolor';
 import chroma from 'chroma-js';
 
 // amount is 0 - 100 given 100 will always return black
-export const darken = (color, amount = 15) =>
-  new TinyColor(color).darken(amount).toString();
+export const darken = (color, amount = 15) => new TinyColor(color).darken(amount).toString();
 
-export const lighten = (color, amount = 15) =>
-  new TinyColor(color).lighten(amount).toString();
+export const lighten = (color, amount = 15) => new TinyColor(color).lighten(amount).toString();
 
-export const setAlpha = (color, value) =>
-  new TinyColor(color).setAlpha(value).toString();
+export const setAlpha = (color, value) => new TinyColor(color).setAlpha(value).toString();
 
-export const getTheme = color => new TinyColor(color).isLight();
+export const getTheme = (color) => new TinyColor(color).isLight();
 
 export const getContrastColor = (color, value1, value2) =>
   getTheme(color) ? darken(color, value1) : lighten(color, value2);
 
-export const getSecondaryColor = hex => {
+export const getSecondaryColor = (hex) => {
   const hsv = chroma(hex).hsv();
   hsv[1] -= 0.16;
   hsv[2] += 0.44;
   return chroma({ h: hsv[0], s: hsv[1], v: hsv[2] }).hex();
 };
 
-export const getTextColor = color => {
+export const getTextColor = (color) => {
   if (new TinyColor(color).getLuminance() > 0.179) {
     return 'black';
   } else {
@@ -93,5 +90,5 @@ export const Colors = {
   coolGray900: '#7C7F8E',
   gray58: '#949494',
   spaceBlue: '#0C173C',
-  mediumBlue: '#9AD8E8',
+  mediumBlue: '#9AD8E8'
 };
