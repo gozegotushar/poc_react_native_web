@@ -1,4 +1,4 @@
 # To Run this POC.
 
-yarn install
-yarn web
+- yarn install
+- yarn web
