@@ -5,9 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useTheme } from '../../hooks/theme';
 import Button from '../../components/Button';
 import Spacing from '../../components/Spacing';
-import ColorPicker from '../../components/ColorPicker';
+import AppColorPicker from '../../components/AppColorPicker';
 import { setPrimaryColor, setSecondaryColor } from '../../store/features/overriddenConfig/actions';
-import Animated from 'react-native-reanimated';
 
 function ScreenUtility(props) {
   const { theme } = useTheme();
@@ -39,13 +38,7 @@ function ScreenUtility(props) {
 
   return (
     <View style={{ padding: 10 }}>
-      {/* <Animated.View
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: 'violet'
-        }}
-      /> */}
+
       <Button
         title="Select Primary Color"
         backgroundColor={theme.getPrimary()}
@@ -58,12 +51,12 @@ function ScreenUtility(props) {
         onPress={onSecondaryColorChangeClicked}
       />
       <Spacing height={10} />
-      <ColorPicker
+      <AppColorPicker
         shouldShow={showPrimaryColorPicker}
         onCloseModal={onCloseModal}
         onSavePressed={savePrimaryColor}
       />
-      <ColorPicker
+      <AppColorPicker
         shouldShow={showSecondaryColorPicker}
         onCloseModal={onCloseModal}
         onSavePressed={saveSecondaryColor}
