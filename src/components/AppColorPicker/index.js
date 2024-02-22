@@ -1,18 +1,15 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text } from 'react-native';
 import makeStyles from './styles';
 import { useTheme } from '../../hooks/theme';
 import AppTextInput from '../AppTextInput';
 import Spacing from '../Spacing';
 import AppModal from '../AppModal';
-// import ColorPicker, {
-//   Preview,
-//   OpacitySlider,
-//   BrightnessSlider,
-//   HueSlider,
-//   SaturationSlider,
-// } from 'reanimated-color-picker';
-function AppColorPicker({ shouldShow = false, onCloseModal = undefined, onSavePressed = undefined }) {
+import ColorPicker, { Panel1, Swatches, Preview, OpacitySlider, HueSlider } from 'reanimated-color-picker';
+import { rgbToHex } from '../../utils/ColorUtils';
+
+function AppColorPicker({ shouldShow = false, onCloseModal = undefined, onSavePressed = undefined, title = 'Color picker', initialColor = 'red'
+}) {
   const { theme } = useTheme();
   const styles = useMemo(() => makeStyles(theme), [theme]);
   const [enteredColor, setEnteredColor] = useState('');
@@ -32,45 +29,51 @@ function AppColorPicker({ shouldShow = false, onCloseModal = undefined, onSavePr
     onSavePressed?.(enteredColor);
   };
 
-  const onSelectColor = (hex) => {
-    setEnteredColor(hex);
+  useEffect(() => {
+
+  }, [])
+
+  const onSelectColor = ({ rgb }) => {
+    let color = rgbToHex(rgb)
+    console.log("onSelectColor : ", color)
+    setEnteredColor(color);
   };
 
   return (
     <AppModal shouldShow={shouldShow} onCloseModal={closeModal} onSaveClicked={onSaveClicked}>
-      <View>
-        {/* <Text style={styles.textStyle}>{'Color picker'}</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={styles.textStyle}>{title}</Text>
         <Spacing height={20} />
-        <AppTextInput onTextChanged={onSelectColor} />
-        <Spacing height={20} /> */}
-        {/* <ColorPicker
-          style={{ width: '75%', justifyContent: 'center' }}
-          sliderThickness={30}
-          thumbSize={40}
-          thumbShape="circle">
-          <Preview
-            style={[styles.previewStyle, styles.shadow]}
-            textStyle={{ fontSize: 18 }}
-            colorFormat="hex"
-            hideInitialColor
-          />
-          <Text style={styles.sliderLabel}>Hue:</Text>
-          <HueSlider
-            style={[{ borderRadius: 15, marginBottom: 25 }, styles.shadow]}
-          />
-          <Text style={styles.sliderLabel}>Brightness:</Text>
-          <BrightnessSlider
-            style={[{ borderRadius: 15, marginBottom: 25 }, styles.shadow]}
-          />
-          <Text style={styles.sliderLabel}>Saturation:</Text>
-          <SaturationSlider
-            style={[{ borderRadius: 15, marginBottom: 25 }, styles.shadow]}
-          />
-          <Text style={styles.sliderLabel}>Opacity:</Text>
-          <OpacitySlider
-            style={[{ borderRadius: 15, marginBottom: 25 }, styles.shadow]}
-          />
-        </ColorPicker> */}
+        <ColorPicker
+          thumbAnimationDuration={400}
+          style={{ width: '70%' }} value={initialColor} onComplete={onSelectColor}>
+
+          <View>
+            <Text>Preview</Text>
+            <Preview disableOpacityTexture={true} />
+          </View>
+          <Spacing height={20} />
+          <View>
+            <Text>Panel</Text>
+            <Panel1 />
+          </View>
+          <Spacing height={20} />
+          <View>
+            <Text>HueSlider</Text>
+            <HueSlider />
+          </View>
+          <Spacing height={20} />
+          <View>
+            <Text>Opacity</Text>
+            <OpacitySlider />
+          </View>
+          <Spacing height={20} />
+          <View>
+            <Text>Swatches</Text>
+            <Swatches />
+          </View>
+
+        </ColorPicker>
       </View>
     </AppModal>
   );

@@ -37,7 +37,7 @@ function AppModal({
             width: responsiveSize(200),
             alignItems: 'center'
           }}>
-          <View>
+          <View style={{ alignItems: 'center' }}>
             <View>{children}</View>
             <View style={{ flexDirection: 'row' }}>
               <Button title="Close" backgroundColor={theme.getPrimary()} onPress={closeModal} />

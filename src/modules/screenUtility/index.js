@@ -38,7 +38,6 @@ function ScreenUtility(props) {
 
   return (
     <View style={{ padding: 10 }}>
-
       <Button
         title="Select Primary Color"
         backgroundColor={theme.getPrimary()}
@@ -52,11 +51,15 @@ function ScreenUtility(props) {
       />
       <Spacing height={10} />
       <AppColorPicker
+        initialColor={theme.getPrimary()}
+        title={'Pick primary color'}
         shouldShow={showPrimaryColorPicker}
         onCloseModal={onCloseModal}
         onSavePressed={savePrimaryColor}
       />
       <AppColorPicker
+        initialColor={theme.getSecondary()}
+        title={'Pick secondary color'}
         shouldShow={showSecondaryColorPicker}
         onCloseModal={onCloseModal}
         onSavePressed={saveSecondaryColor}
