@@ -7,6 +7,8 @@ import Button from '../../components/Button';
 import Spacing from '../../components/Spacing';
 import AppColorPicker from '../../components/AppColorPicker';
 import { setPrimaryColor, setSecondaryColor } from '../../store/features/overriddenConfig/actions';
+import SolidButton from '../../components/SolidButton';
+import { responsiveSize } from '../../utils/Size';
 
 function ScreenUtility(props) {
   const { theme } = useTheme();
@@ -50,6 +52,7 @@ function ScreenUtility(props) {
         onPress={onSecondaryColorChangeClicked}
       />
       <Spacing height={10} />
+
       <AppColorPicker
         initialColor={theme.getPrimary()}
         title={'Pick primary color'}

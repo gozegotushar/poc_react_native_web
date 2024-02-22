@@ -12,6 +12,21 @@ export const fontWeight = {
   Black: '900',
 };
 
+const percentageCalculation = (max, val) => max * (val / 100);
+
+const fontCalculation = (val) => {
+  let height = dimension.fullHeight
+  let width = dimension.fullWidth
+  const widthDimension = height > width ? width : height;
+  const aspectRatioBasedHeight = (16 / 9) * widthDimension;
+  return percentageCalculation(
+    Math.sqrt(
+      Math.pow(aspectRatioBasedHeight, 2) + Math.pow(widthDimension, 2)
+    ),
+    val
+  );
+};
+
 // https://github.com/DaniAkash/react-native-responsive-dimensions
 export const responsiveFontSize = f => {
   let result =
@@ -33,7 +48,7 @@ export const font = {
     xl: responsiveFontSize(2.6),
     l: responsiveFontSize(2.3),
     m: responsiveFontSize(1.9),
-    s: responsiveFontSize(1.68),
+    s: Platform.OS === 'web' ? responsiveFontSize(1) : responsiveFontSize(1.68),
     xs: responsiveFontSize(1.54),
     xxs: responsiveFontSize(1.37),
     xxxs: responsiveFontSize(1.2),

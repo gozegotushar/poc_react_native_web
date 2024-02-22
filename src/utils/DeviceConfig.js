@@ -12,6 +12,6 @@ export const notchPosition = 'middle';
 export const notchMarginTop = 8;
 export const notchColor = 'black';
 export const statusBarHeight = 30;
-export const PrimaryColor = '#7F27FF';
+export const PrimaryColor = '#21275c';
 export const SecondaryColor = '#FF8911';
 export const buttonBorderRadius = 5;
